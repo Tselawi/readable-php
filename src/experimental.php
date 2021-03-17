@@ -1,15 +1,14 @@
 <?php
+//declare(strict_types=1);
 
 #TODO: replace unclear variables names to clears names
 #TODO: declares clears functions names
 
-// fw = for who
+
 function orderDetail($typeOfPizza, $client)
 {
 
     echo 'Creating new order... <br>';
-//    $firstLetter = 'A ';
-//    $firstLetter .= $typeOfPizza;
     $price = listPizzaPrice($typeOfPizza);
 
     $address = 'unknown';
@@ -25,63 +24,32 @@ function orderDetail($typeOfPizza, $client)
         $address = 'BeCode office';
         }
 
-        $firstLetter = "A {$typeOfPizza}  pizza should be sent to  {$client}.  <br>The address: {$address}.";
-        echo "{$firstLetter} <br> The bill is €{$price}. <br> Order finished. <br><br>";
+        $toPrint = "A {$typeOfPizza}  pizza should be sent to  {$client}.  <br>The address: {$address}.";
+        echo "{$toPrint} <br> The bill is €{$price}. <br> Order finished. <br><br>";
+        return $toPrint;
 }
-
-//function total_price($price)
-//    # this function we don't use it
-//{
-//    return $price;
-//}
-//
-//function test($pizzaType)
-//    # this function we don't use it
-//{
-//    echo "Test: type is {$pizzaType}. <br>";
-//}
 
 function listPizzaPrice($pizzaType)
 {
-    if ($pizzaType == 'unknown' || $pizzaType == "") {
-        $priceList = 'unknown';
+    $price=0;
+    if ($pizzaType == 'margherita') {
+        $price = 5;
     }
-
-    if ($pizzaType == 'marguerita') {
-        $priceList = 5;
+    elseif ($pizzaType == 'golden') {
+        $price = 100;
     }
-
-    if ($pizzaType == 'golden') {
-        $priceList = 100;
+    elseif ($pizzaType == 'calzone') {
+        $price = 10;
     }
-
-    if ($pizzaType == 'calzone') {
-        $priceList = 10;
-    }
-
-    if ($pizzaType == 'hawai') {
+    elseif ($pizzaType == 'hawai') {
         throw new Exception('Computer says no');
+    }else{
+        $price = 5;
     }
 
-    return $priceList;
+    return $price;
 }
+orderDetail('calzone', 'nico');
+orderDetail('marguerita', 'nick');
+orderDetail('golden', 'students');
 
-            function orderedPizza()
-            {
-//            $test= 0;
-            orderDetail('calzone', 'nico');
-            orderDetail('marguerita', 'nick');
-
-            orderDetail('golden', 'students');
-            }
-
-function doneOrder($done) {
-if ($done) {
-        orderedPizza();
-    } else {
-        // Should not do anything when false
-         
-    }
-}
-
-doneOrder(true);
